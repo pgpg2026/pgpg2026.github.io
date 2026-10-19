@@ -48,17 +48,17 @@
         <span class="sub">for aligning <b>generative control policies</b></span>
       </h1>
       <p class="authors">
-        <span>Tung M. Luu<sup>1</sup></span>,
-        <span>Tri Ton<sup>1</sup></span>,
-        <span>Duc M. Nguyen<sup>2,3</sup></span>,
-        <span>Xuan Thanh Nguyen<sup>1</sup></span>,
-        <span>Nguyen Gia Binh<sup>2,3</sup></span>,
-        <span>Quang Tan Nguyen<sup>3</sup></span>,
-        <span>Vu Duong<sup>2</sup></span>,
-        <span>Daniel Sonntag<sup>6,7</sup></span>,
-        <span>Duy M. H. Nguyen<sup>4,5,6</sup></span>,
-        <span>Vien Anh Ngo<sup>2,3</sup></span>,
-        <span>Chang D. Yoo<sup>1</sup></span>
+        <span><a href="https://tungluu94.github.io/" target="_blank" rel="noopener">Tung M. Luu</a><sup>1</sup></span>,
+        <span><a href="https://triton99.github.io" target="_blank" rel="noopener">Tri Ton</a><sup>1</sup></span>,
+        <span><a href="https://openreview.net/profile?id=~Minh_Duc_Nguyen3" target="_blank" rel="noopener">Duc M. Nguyen</a><sup>2,3</sup></span>,
+        <span><a href="https://thanhkaist.github.io/" target="_blank" rel="noopener">Xuan Thanh Nguyen</a><sup>1</sup></span>,
+        <span><a href="https://openreview.net/profile?id=~Nguyen_Gia_Binh1" target="_blank" rel="noopener">Nguyen Gia Binh</a><sup>2,3</sup></span>,
+        <span><a href="https://openreview.net/profile?id=~Quang_Tan_Nguyen1" target="_blank" rel="noopener">Quang Tan Nguyen</a><sup>3</sup></span>,
+        <span><a href="https://scholar.google.com/citations?user=ilaMdTEAAAAJ&amp;hl=en" target="_blank" rel="noopener">Vu Duong</a><sup>2</sup></span>,
+        <span><a href="https://www.dfki.de/~daso02/" target="_blank" rel="noopener">Daniel Sonntag</a><sup>6,7</sup></span>,
+        <span><a href="https://duyhominhnguyen.github.io/" target="_blank" rel="noopener">Duy M. H. Nguyen</a><sup>4,5,6</sup></span>,
+        <span><a href="https://vienngo.github.io/" target="_blank" rel="noopener">Vien Anh Ngo</a><sup>2,3</sup></span>,
+        <span><a href="https://sanctusfactory.com/family.php" target="_blank" rel="noopener">Chang D. Yoo</a><sup>1</sup></span>
       </p>
       <p class="affils">
         <span><sup>1</sup>KAIST</span>
@@ -88,10 +88,10 @@
       </div>
 
       <div class="stats reveal">
-        <div class="stat"><div class="n">74.5<small>+37.3</small></div><div class="l">Robomimic 5-task average, Diffusion Policy (37.2 before fine-tuning)</div></div>
-        <div class="stat"><div class="n">76.7<small>+33.2</small></div><div class="l">Robomimic 5-task average, flow-matching policy (43.5 before)</div></div>
-        <div class="stat"><div class="n">72.1<small>+21.5</small></div><div class="l">LIBERO-10 average, GR00T N1.7 VLA with 5 demos per task (50.5 pretrained)</div></div>
-        <div class="stat"><div class="n">31&times;</div><div class="l">Faster progress scoring than the Robometer reward model: 0.087 s vs 2.691 s per trajectory</div></div>
+        <div class="stat"><div class="n">74.5%<small>+37.3</small></div><div class="l">Average success rate on five Robomimic tasks, Diffusion Policy (base policy 37.2%)</div></div>
+        <div class="stat"><div class="n">76.7%<small>+33.2</small></div><div class="l">Average success rate on five Robomimic tasks, flow-matching policy (base policy 43.5%)</div></div>
+        <div class="stat"><div class="n">72.1%<small>+21.5</small></div><div class="l">Average success rate on LIBERO-10, GR00T N1.7 VLA with 5 demos per task (base policy 50.5%)</div></div>
+        <div class="stat"><div class="n">31&times;</div><div class="l">Faster than Robometer at computing progress rewards: 0.087&nbsp;s vs 2.691&nbsp;s per trajectory</div></div>
       </div>
     </div>
   </header>
@@ -101,9 +101,9 @@
       <figure class="card pad">
         <picture>
           <source srcset="assets/overview.webp" type="image/webp" />
-          <img src="assets/overview.jpg" width="2000" height="998" alt="PGPG overview: rollouts and demonstrations are scored by ordered coverage alignment, marginal progress scoring and multi-demonstration aggregation; the resulting preferred and rejected segments form a preference dataset that fine-tunes the policy." />
+          <img src="assets/overview.jpg" width="1963" height="866" alt="PGPG overview: rollouts and demonstrations are scored by ordered coverage alignment, marginal progress scoring and multi-demonstration aggregation; the resulting preferred and rejected segments form a preference dataset that fine-tunes the policy." />
         </picture>
-        <figcaption><b>Overview of PGPG.</b> Rollouts (<i>D</i><sub>rollout</sub>) are scored against expert references (<i>D</i><sub>demo</sub>) by ordered coverage alignment, marginal progress scoring and multi-demonstration aggregation. The segment scores become preference labels (<i>D</i><sub>pref</sub>) that fine-tune the generative policy <i>&pi;<sub>&theta;</sub></i>(<i>a</i>|<i>s</i>), with no hand-designed reward.</figcaption>
+        <figcaption><b>Overview of PGPG.</b> Rollouts (<i>D</i><sub>rollout</sub>) are scored against expert references sampled from <i>D</i><sub>demo</sub>: ordered coverage alignment measures each rollout&rsquo;s progress, which is converted to marginal progress within a segment and aggregated across the reference demonstrations. The segment scores determine the preference labels (<i>D</i><sub>pref</sub>) that fine-tune the generative policy <i>&pi;<sub>&theta;</sub></i>(<i>a</i>|<i>s</i>), with no hand-designed reward.</figcaption>
       </figure>
     </section>
 
@@ -113,8 +113,8 @@
         <h2>Rollouts are cheap, preference labels are not. A few demonstrations can do the labeling.</h2>
       </div>
       <div class="lede reveal">
-        <p>Diffusion and flow-matching policies imitate experts well, but they are held back by how few expert demonstrations exist. Preference-based fine-tuning can learn from the policy's own imperfect rollouts instead. The catch is that someone has to say which rollout segment is better, and human preference labels are expensive.</p>
-        <p><b>Progress-Guided Preference Generation (PGPG)</b> takes the human out of that loop. It measures how far each rollout segment advances, in order, relative to a small set of expert demonstrations, and turns that progress into pseudo-preference labels for contrastive preference learning. There are no annotators and no reward engineering. PGPG outperforms supervised fine-tuning baselines on five long-horizon Robomimic tasks with both diffusion and flow-matching policies, and it also fine-tunes a 3B-parameter GR00T N1.7 VLA on LIBERO-10.</p>
+        <p>Diffusion and flow-matching policies can learn to imitate experts well, but their performance is limited by the small number of available expert demonstrations. Preference-based fine-tuning can instead learn from the policy&rsquo;s own imperfect rollouts. However, it still needs someone to judge which part of a rollout is better, and collecting these human preferences is expensive.</p>
+        <p><b>Progress-Guided Preference Generation (PGPG)</b> removes the need for human feedback. It measures how far each state of a rollout has progressed through the task, in the same order as a small set of expert demonstrations, and turns the progress made within a segment into automatically generated preference labels that teach the policy which behaviors are better. This avoids both manual labeling and the need to design a reward function. PGPG outperforms supervised fine-tuning baselines on five Robomimic tasks, from simple pick-and-place to precise insertion, with both diffusion and flow-matching policies. It also fine-tunes GR00T N1.7, a 3B vision-language-action (VLA) model, on LIBERO-10.</p>
       </div>
     </section>
 
@@ -201,7 +201,6 @@
           <p>A rollout may solve the task in a different but equally valid way. PGPG scores each segment against <i>M</i> reference demonstrations and keeps the max, so a segment earns credit for matching any expert mode, even when the rollout switches modes along the way.</p>
         </div>
       </div>
-      <p class="note">Sketches after the three panels at the bottom of Fig. 1. The frames come from the figure; the alignments and scores drawn on them are illustrative.</p>
 
       <figure class="card pad reveal mt">
         <div class="grid2" style="align-items:start">
@@ -369,7 +368,6 @@
   booktitle = {Conference on Robot Learning (CoRL)},
   year      = {2026}
 }</pre>
-      <p class="ack reveal"><b>Acknowledgements.</b> This work was supported by the Institute of Information &amp; Communications Technology Planning &amp; Evaluation (IITP) grant funded by the Korea government (MSIT) (No. RS-2021-II211381, Development of Causal AI through Video Understanding and Reinforcement Learning, and Its Applications to Real Environments) and the National Research Foundation of Korea (NRF) grant funded by the Korea government (MSIT) (RS-2025-24742969, Intelligent Robotic System using Continual Learning and Multimodal Language Model based Multi Attribute Feedback). Duy M. H. Nguyen and Daniel Sonntag also acknowledge the support of the Federal Ministry of Research, Technology, and Space (BMFTR) under grant number 16IW26002 (AMENABLE), the Lower Saxony Ministry of Science and Culture (MWK) in the Zukunft.niedersachsen program, and the Endowed Chair of AAI at the University of Oldenburg.</p>
     </section>
   </main>
 
