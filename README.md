@@ -24,7 +24,6 @@ plotted bars to 0.1 and the paper's earlier results table exactly.
 
 ## Before publishing
 
-- **Paper link**: the "Paper (soon)" button in `index.html` is disabled; add the PDF or arXiv URL and drop the `off` class.
 - **Social preview**: `og:image` is relative (`assets/overview.jpg`); many crawlers need an absolute URL, so set it once the address is known.
 - **Address**: GitHub serves a repository named `pgpg.github.io` at `https://pgpg.github.io` only if it belongs to an
   account or organization called `pgpg`. Under another account it is served at `https://<account>.github.io/pgpg.github.io/`.
